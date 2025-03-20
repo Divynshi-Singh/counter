@@ -1,0 +1,145 @@
+body {
+  background: linear-gradient(180deg, #020024, #4b4b9a 35%, #fff);
+  height: 97.8vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: auto;
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 20px;
+}
+
+.btn {
+  color: #fff;
+  background-color: #212529;
+  border-color: #212529;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: .3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+
+.add-counter {
+  padding-top: 9px;
+  margin-top: 7px;
+  margin-left: 8px;
+}
+
+.counter-value {
+  padding-top: 9px;
+  margin-top: 7px;
+  margin-right: 8px;
+}
+
+.counters-row {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 20px;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  margin: 1rem
+}
+
+.start-stop {
+  padding: 10px 10px;
+  font-size: 1.25rem;
+  border-radius: .3rem;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 10px; 
+}
+
+.counter-box {
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: .3rem;
+  margin-top: 10px;
+  font-weight: bold;
+  height: 41px;
+  width: 106px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .counter-container {
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: .4rem .8rem;
+  }
+
+  .add-counter, .counter-value {
+    font-size: 1rem;
+    padding: .4rem .8rem;
+  }
+
+  .start-stop {
+    font-size: 1.1rem;
+    padding: 8px 10px;
+  }
+
+  .counter-box {
+    width: 90px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .counters-row {
+    flex-wrap: nowrap; 
+  }
+}
+@media (max-width: 480px) {
+  .counter-container {
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: .9rem;
+    padding: .3rem .6rem;
+  }
+
+  .add-counter, .counter-value {
+    font-size: 1rem;
+    padding: .3rem .6rem;
+  }
+
+  .start-stop {
+    font-size: 1rem;
+    padding: 7px 8px;
+  }
+
+  .counter-box {
+    width: 80px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .counters-row {
+    flex-wrap: nowrap;
+    justify-content: center; 
+  }
+}
