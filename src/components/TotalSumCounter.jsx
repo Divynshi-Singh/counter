@@ -2,8 +2,7 @@ import React from 'react';
 
 const TotalSumCounter = ({ counters }) => {
     const totalSum = counters.reduce(
-        (sum, counter) => (counter.isStarted ? sum + counter.value : sum),
-        0
+        (sum, counter) => sum + counter.value, 0
     );
 
     return (

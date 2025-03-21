@@ -22,6 +22,7 @@ const Counter = () => {
   useEffect(() => {
     counters.forEach((counter) => {
       if (counter.isStarted && !intervalsRef.current[counter.id]) {
+
         intervalsRef.current[counter.id] = setInterval(() => {
           setCounters((prevCounters) =>
             prevCounters.map((c) =>
@@ -30,10 +31,13 @@ const Counter = () => {
           );
         }, 1000);
       } else if (!counter.isStarted && intervalsRef.current[counter.id]) {
+
         clearInterval(intervalsRef.current[counter.id]);
         delete intervalsRef.current[counter.id];
       }
     });
+
+
     return () => {
       Object.values(intervalsRef.current).forEach(clearInterval);
       intervalsRef.current = {};
@@ -42,11 +46,10 @@ const Counter = () => {
 
   return (
     <div>
-      {/* Add Counter button */}
+
       <button className="add-counter btn" onClick={handleAddCounterClick}>
         Add Counter
       </button>
-      {/* TotalSumCounter component for showing total sum */}
       <TotalSumCounter counters={counters} />
       <div className="counters-row">
         {counters.map((counter) => (
