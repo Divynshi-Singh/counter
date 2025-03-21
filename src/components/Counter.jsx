@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import TotalSumCounter from './TotalSumCounter';
 
 const Counter = () => {
   const [counters, setCounters] = useState([]);
-  const handleAddCounterClick = () => {
+  const intervalsRef = useRef({});
 
+  const handleAddCounterClick = () => {
     setCounters([...counters, { id: Date.now(), value: 0, isStarted: false }]);
   };
+
   const handleStartStop = (id) => {
     setCounters((prevCounters) =>
       prevCounters.map((counter) =>
@@ -17,22 +20,23 @@ const Counter = () => {
   };
 
   useEffect(() => {
-    const intervals = counters.map((counter) => {
-      let interval;
-      if (counter.isStarted) {
-        interval = setInterval(() => {
+    counters.forEach((counter) => {
+      if (counter.isStarted && !intervalsRef.current[counter.id]) {
+        intervalsRef.current[counter.id] = setInterval(() => {
           setCounters((prevCounters) =>
             prevCounters.map((c) =>
               c.id === counter.id ? { ...c, value: c.value + 1 } : c
             )
           );
         }, 1000);
+      } else if (!counter.isStarted && intervalsRef.current[counter.id]) {
+        clearInterval(intervalsRef.current[counter.id]);
+        delete intervalsRef.current[counter.id];
       }
-
-      return { id: counter.id, interval };
     });
     return () => {
-      intervals.forEach(({ interval }) => clearInterval(interval));
+      Object.values(intervalsRef.current).forEach(clearInterval);
+      intervalsRef.current = {};
     };
   }, [counters]);
 
@@ -42,12 +46,11 @@ const Counter = () => {
       <button className="add-counter btn" onClick={handleAddCounterClick}>
         Add Counter
       </button>
-      {/* <button className='counter-value btn'>0</button> */}
-
+      {/* TotalSumCounter component for showing total sum */}
+      <TotalSumCounter counters={counters} />
       <div className="counters-row">
         {counters.map((counter) => (
           <div key={counter.id} className="center-container">
-
             <button
               className="start-stop"
               onClick={() => handleStartStop(counter.id)}
