@@ -6,10 +6,11 @@ const TotalSumCounter = ({ counters }) => {
     );
 
     return (
-        <div>
-            <button className="counter-value btn">{totalSum}</button>
-        </div>
+
+        <button className="counter-value btn">{totalSum}</button>
+
     );
 };
 
 export default TotalSumCounter;
+

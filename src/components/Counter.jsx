@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import TotalSumCounter from './TotalSumCounter';
-import CounterModal from './CounterModal';
+import React, { useState, useEffect, useRef } from "react";
+import TotalSumCounter from "./TotalSumCounter";
+import CounterModal from "./CounterModal";
 
 const Counter = () => {
   const [counters, setCounters] = useState([]);
   const intervalsRef = useRef({});
 
   const handleAddCounterClick = () => {
-    setCounters([...counters, { id: Date.now(), value: 0, isStarted: false }]);
+    setCounters((prev) => [
+      ...prev,
+      { id: Date.now(), value: 0, isStarted: false },
+    ]);
   };
 
   const handleStartStop = (id) => {
@@ -37,10 +40,14 @@ const Counter = () => {
     });
 
     return () => {
-      Object.values(intervalsRef.current).forEach(clearInterval);
-      intervalsRef.current = {};
+      Object.keys(intervalsRef.current).forEach((id) => {
+        if (!counters.find((counter) => counter.id === Number(id))?.isStarted) {
+          clearInterval(intervalsRef.current[id]);
+          delete intervalsRef.current[id];
+        }
+      });
     };
-  }, [counters]);
+  }, [counters.map((counter) => counter.isStarted)]);
 
   return (
     <div>
@@ -51,10 +58,7 @@ const Counter = () => {
       <div className="counters-row">
         {counters.map((counter) => (
           <div key={counter.id} className="center-container">
-            <CounterModal
-              counter={counter}
-              handleStartStop={handleStartStop}
-            />
+            <CounterModal counter={counter} handleStartStop={handleStartStop} />
           </div>
         ))}
       </div>
