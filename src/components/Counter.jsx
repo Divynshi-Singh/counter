@@ -47,7 +47,7 @@ const Counter = () => {
         }
       });
     };
-  }, [counters.map((counter) => counter.isStarted)]);
+  }, [counters]);
 
   return (
     <div>
